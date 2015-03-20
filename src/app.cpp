@@ -12,6 +12,8 @@ App* gp_app = NULL;
 App::App()
 {
   mp_renderwindow = new sf::RenderWindow(sf::VideoMode(640, 480), "Mini TSC");
+  m_gamefont.loadFromFile("../data/fonts/DejaVuSans.ttf");
+
   mp_texture_manager = new TextureManager;
   mp_scene_manager = new SceneManager;
 }

@@ -9,8 +9,12 @@ public:
   ~App();
 
   int run();
+  inline sf::Font& get_gamefont(){return m_gamefont;}
+  inline sf::RenderWindow& get_renderwindow(){return *mp_renderwindow;}
 private:
   sf::RenderWindow* mp_renderwindow;
+  sf::Font m_gamefont;
+
   TextureManager* mp_texture_manager;
   SceneManager* mp_scene_manager;
 };
