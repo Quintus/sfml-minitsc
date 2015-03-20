@@ -3,6 +3,7 @@ project(MiniTSC)
 enable_language(CXX)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
+include(ExternalProject)
 
 ########################################
 # Extra flags
@@ -29,6 +30,19 @@ include_directories(
   )
 
 ########################################
+# External projects
+
+# Pathie
+ExternalProject_Add(
+  pathie
+  PREFIX "${CMAKE_BINARY_DIR}/pathie"
+  DOWNLOAD_COMMAND ""
+  UPDATE_COMMAND ""
+  CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/pathie/install"
+  SOURCE_DIR "${CMAKE_SOURCE_DIR}/pathie")
+include_directories(${CMAKE_BINARY_DIR}/pathie/install/include/pathie)
+
+########################################
 # Source files
 
 file(GLOB minitsc_sources
@@ -41,5 +55,7 @@ file(GLOB minitsc_sources
 add_executable(minitsc ${minitsc_sources})
 target_link_libraries(minitsc
   ${SFML_LIBRARIES}
+  ${CMAKE_BINARY_DIR}/pathie/install/lib/libpathie.a
 #  ${OPENGL_LIBRARIES}
 )
+add_dependencies(minitsc pathie)
