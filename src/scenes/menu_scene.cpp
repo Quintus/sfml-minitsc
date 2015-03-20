@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "scene.hpp"
 #include "menu_scene.hpp"
+#include "level_scene.hpp"
 #include "../scene_manager.hpp"
 #include "../texture_manager.hpp"
 #include "../app.hpp"
@@ -30,6 +31,19 @@ MenuScene::~MenuScene()
 void MenuScene::handle_event(sf::Event& evt)
 {
   Scene::handle_event(evt);
+
+  switch(evt.type) {
+  case sf::Event::KeyPressed:
+    if (evt.key.code == sf::Keyboard::Return) {
+      // Place the target scene (level scene) on top of
+      // the stack, so that it will automatically get
+      // rendered on next mainloop iteration.
+      gp_app->get_scene_manager().push_scene(new LevelScene);
+    }
+  default:
+    // Ignore
+    break;
+  }
 }
 
 void MenuScene::update()

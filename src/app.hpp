@@ -11,6 +11,7 @@ public:
   int run();
   inline sf::Font& get_gamefont(){return m_gamefont;}
   inline sf::RenderWindow& get_renderwindow(){return *mp_renderwindow;}
+  inline SceneManager& get_scene_manager(){return *mp_scene_manager;}
 private:
   sf::RenderWindow* mp_renderwindow;
   sf::Font m_gamefont;
