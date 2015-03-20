@@ -14,7 +14,8 @@ public:
   virtual void update();
   virtual void draw(sf::RenderWindow& stage);
 private:
-
+  sf::Texture& m_ground_texture;
+  std::vector<sf::Sprite*> m_ground_sprites;
 };
 
 #endif
