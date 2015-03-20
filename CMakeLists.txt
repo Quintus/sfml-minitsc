@@ -13,10 +13,11 @@ if (CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
 endif()
 
 if (${CMAKE_BUILD_TYPE} MATCHES Debug)
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -D_PIPHONED_DEBUG")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
 endif()
 
 add_definitions("-Wall")
+add_definitions("-std=c++11")
 
 ########################################
 # Dependencies
@@ -45,7 +46,7 @@ include_directories(${CMAKE_BINARY_DIR}/pathie/install/include/pathie)
 ########################################
 # Source files
 
-file(GLOB minitsc_sources
+file(GLOB_RECURSE minitsc_sources
   "src/*.cpp"
   "src/*.hpp")
 

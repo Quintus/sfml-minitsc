@@ -3,6 +3,10 @@
 
 class TextureManager
 {
+public:
+  sf::Texture& get_texture(const Pathie::Path& path);
+private:
+  std::map<Pathie::Path, sf::Texture> m_textures;
 };
 
 #endif
