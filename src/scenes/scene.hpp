@@ -18,6 +18,9 @@ public:
   virtual void handle_event(sf::Event& evt);
   virtual void update();
   virtual void draw(sf::RenderWindow& stage);
+
+  inline std::vector<Actor*>::iterator begin_actors(){return m_actors.begin();}
+  inline std::vector<Actor*>::iterator end_actors(){return m_actors.end();}
 protected:
   std::vector<Actor*> m_actors;
 };

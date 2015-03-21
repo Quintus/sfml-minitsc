@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <pathie.hpp>
 #include "actor.hpp"
+#include "static_actor.hpp"
 #include "player_actor.hpp"
 #include "../scenes/scene.hpp"
 #include "../scene_manager.hpp"
@@ -32,10 +33,28 @@ void PlayerActor::update()
 {
   int delta_x = 0;
   int delta_y = 0;
+
   if (m_speed_x > 0)
     delta_x = m_speed_x;
-  if (m_speed_y > 0)
-    delta_y = m_speed_y;
+
+  // Apply gravity
+  delta_y += gp_app->get_gravity_factor();
+
+  // Check ground collision that stops falling.
+  // Yes this is utterly unperformant. It’s just for the sake of example.
+  sf::FloatRect player_box = mp_sprite->getGlobalBounds();
+  int player_bottom_y = player_box.top + player_box.height;
+  StaticActor* p_intersect_actor = NULL;
+  std::vector<Actor*>::iterator iter;
+  for(iter=gp_app->get_scene_manager().current_scene().begin_actors(); iter != gp_app->get_scene_manager().current_scene().end_actors(); iter++) {
+    if ((p_intersect_actor = dynamic_cast<StaticActor*>(*iter))) { // Single = intended
+      sf::FloatRect otherbox = p_intersect_actor->get_collision_rect();
+      if (otherbox.contains(sf::Vector2f(player_box.left, player_bottom_y))) {
+	delta_y = 0;
+	break;
+      }
+    }
+  }
 
   mp_sprite->move(delta_x, delta_y);
 }

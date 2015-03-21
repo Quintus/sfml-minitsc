@@ -17,6 +17,7 @@ public:
   Scene* pop_scene();
 
   void play(sf::RenderWindow& stage);
+  inline Scene& current_scene(){return *m_scenes_stack.top();}
 private:
   bool handle_global_event(sf::Event& evt);
 
