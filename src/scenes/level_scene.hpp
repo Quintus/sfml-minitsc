@@ -16,7 +16,7 @@ public:
 private:
   // Convenience shortcut, so we don’t have to filter out
   // the player all the time from the list of all actors.
-  Actor* mp_player_actor;
+  PlayerActor* mp_player_actor;
 };
 
 #endif

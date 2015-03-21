@@ -33,6 +33,21 @@ LevelScene::~LevelScene()
 void LevelScene::handle_event(sf::Event& evt)
 {
   Scene::handle_event(evt);
+
+  switch(evt.type) {
+  case sf::Event::KeyPressed:
+    if (evt.key.code == sf::Keyboard::Right) {
+      mp_player_actor->set_speed(5, -1);
+    }
+    break;
+  case sf::Event::KeyReleased:
+    if (evt.key.code == sf::Keyboard::Right) {
+      mp_player_actor->set_speed(0, -1);
+    }
+    break;
+  default:
+    break; // Ignore
+  }
 }
 
 void LevelScene::update()
