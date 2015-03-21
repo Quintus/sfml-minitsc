@@ -1,0 +1,13 @@
+SFML Test
+=========
+
+This is a more complex test of SFML. I have used this as an example of
+how I imagine a scene-based game system.
+
+The main loop is in SceneManager::play(). The scene manager implements
+a stack of scenes, where the top scene is what is rendered
+currently. This can easily be extended for things like a main menu
+that are then just put onto the stack, and when you’re done, you
+return to the level scene.
+
+Sprites are implemented as actors in this model.
