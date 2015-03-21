@@ -43,7 +43,7 @@ void PlayerActor::update()
   // Check ground collision that stops falling.
   // Yes this is utterly unperformant. It’s just for the sake of example.
   sf::FloatRect player_box = mp_sprite->getGlobalBounds();
-  int player_bottom_y = player_box.top + player_box.height;
+  unsigned int player_bottom_y = player_box.top + player_box.height;
   StaticActor* p_intersect_actor = NULL;
   std::vector<Actor*>::iterator iter;
   for(iter=gp_app->get_scene_manager().current_scene().begin_actors(); iter != gp_app->get_scene_manager().current_scene().end_actors(); iter++) {
@@ -54,6 +54,11 @@ void PlayerActor::update()
 	break;
       }
     }
+  }
+
+  // End game if the player touches the lower screen edge.
+  if (player_bottom_y >= gp_app->get_renderwindow().getSize().x) {
+    gp_app->get_scene_manager().end_play();
   }
 
   mp_sprite->move(delta_x, delta_y);

@@ -18,6 +18,7 @@ public:
 
   void play(sf::RenderWindow& stage);
   inline Scene& current_scene(){return *m_scenes_stack.top();}
+  inline void end_play(){m_end_play = true;}
 private:
   bool handle_global_event(sf::Event& evt);
 
