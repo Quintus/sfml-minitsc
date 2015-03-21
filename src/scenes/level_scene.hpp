@@ -14,12 +14,9 @@ public:
   virtual void update();
   virtual void draw(sf::RenderWindow& stage);
 private:
-  sf::Texture& m_ground_texture;
-  sf::Texture& m_player_stand_texture;
-  sf::Texture& m_player_walk1_texture;
-  sf::Texture& m_player_walk2_texture;
-  std::vector<sf::Sprite*> m_ground_sprites;
-  sf::Sprite* mp_player_sprite;
+  // Convenience shortcut, so we don’t have to filter out
+  // the player all the time from the list of all actors.
+  Actor* mp_player_actor;
 };
 
 #endif

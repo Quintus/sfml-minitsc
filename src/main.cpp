@@ -3,6 +3,7 @@
 #include <pathie.hpp>
 #include <SFML/Graphics.hpp>
 #include "texture_manager.hpp"
+#include "actors/actor.hpp"
 #include "scenes/scene.hpp"
 #include "scene_manager.hpp"
 #include "app.hpp"

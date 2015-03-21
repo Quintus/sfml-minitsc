@@ -1,6 +1,7 @@
 #include <stack>
 #include <SFML/Graphics.hpp>
 #include <pathie.hpp>
+#include "actors/actor.hpp"
 #include "scenes/scene.hpp"
 #include "scenes/menu_scene.hpp"
 #include "texture_manager.hpp"

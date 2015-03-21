@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stack>
 #include <SFML/Graphics.hpp>
+#include "actors/actor.hpp"
 #include "scenes/scene.hpp"
 #include "scene_manager.hpp"
 
