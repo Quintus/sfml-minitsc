@@ -18,7 +18,6 @@ PlayerActor::PlayerActor()
   mp_sprite = new sf::Sprite;
   mp_sprite->setTexture(stand_texture);
   mp_sprite->setPosition(10, 10);
-  mp_sprite->setScale(0.13671875, 0.13671875); // 512 px image scaled down to 70 pixels
 }
 
 PlayerActor::~PlayerActor()
