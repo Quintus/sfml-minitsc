@@ -13,6 +13,8 @@ public:
   virtual void handle_event(sf::Event& evt);
   virtual void update();
   virtual void draw(sf::RenderWindow& stage);
+
+  inline Scenery& get_scenery(){return *mp_scenery;}
 private:
   // Convenience shortcut, so we don’t have to filter out
   // the player all the time from the list of all actors.

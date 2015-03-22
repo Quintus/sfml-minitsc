@@ -4,7 +4,9 @@
 #include "actor.hpp"
 #include "static_actor.hpp"
 #include "player_actor.hpp"
+#include "../scenery.hpp"
 #include "../scenes/scene.hpp"
+#include "../scenes/level_scene.hpp"
 #include "../scene_manager.hpp"
 #include "../texture_manager.hpp"
 #include "../app.hpp"
@@ -40,20 +42,18 @@ void PlayerActor::update()
   // Apply gravity
   delta_y += gp_app->get_gravity_factor();
 
-  // Check ground collision that stops falling.
-  // Yes this is utterly unperformant. It’s just for the sake of example.
+  // Find player bottom coordinate
   sf::FloatRect player_box = mp_sprite->getGlobalBounds();
   unsigned int player_bottom_y = player_box.top + player_box.height;
-  StaticActor* p_intersect_actor = NULL;
-  std::vector<Actor*>::iterator iter;
-  for(iter=gp_app->get_scene_manager().current_scene().begin_actors(); iter != gp_app->get_scene_manager().current_scene().end_actors(); iter++) {
-    if ((p_intersect_actor = dynamic_cast<StaticActor*>(*iter))) { // Single = intended
-      sf::FloatRect otherbox = p_intersect_actor->get_collision_rect();
-      if (otherbox.contains(sf::Vector2f(player_box.left, player_bottom_y))) {
-	delta_y = 0;
-	break;
-      }
-    }
+  // PlayerActor may only ever be used in LevelScene, so we can predict
+  // that the current scene is a LevelScene instance.
+  LevelScene& current_scene = static_cast<LevelScene&>(gp_app->get_scene_manager().current_scene());
+
+  // Check for ground collision.
+  // TODO: Should not check this on each frame. Set a bool if we are on ground
+  // instead (performance and flickering reasons).
+  if (current_scene.get_scenery().contains(sf::Vector2f(player_box.left, player_bottom_y))) {
+    delta_y = 0;
   }
 
   // End game if the player touches the lower screen edge.

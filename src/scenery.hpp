@@ -15,6 +15,23 @@ public:
   virtual ~Scenery();
 
   void add_scenery(int tileset_x, int tileset_y, int x, int y);
+
+  /**
+   * Checks if the given point is withing any of the bounding boxes of
+   * a scenery element.
+   */
+  template<typename T>
+  bool contains(const sf::Vector2<T>& point)
+  {
+    std::vector<sf::FloatRect>::iterator iter;
+    for(iter=m_bounding_boxes.begin(); iter != m_bounding_boxes.end(); iter++) {
+      if ((*iter).contains(point)) {
+	return true;
+      }
+    }
+
+    return false;
+  }
 private:
   virtual void draw(sf::RenderTarget& stage, sf::RenderStates states) const;
 
@@ -23,6 +40,7 @@ private:
   int m_edge_size;
   sf::Texture m_tileset;
   sf::VertexArray m_vertices;
+  std::vector<sf::FloatRect> m_bounding_boxes;
 };
 
 #endif

@@ -16,9 +16,11 @@ Scenery::~Scenery()
 
 void Scenery::add_scenery(int tileset_x, int tileset_y, int x, int y)
 {
+  // Add space for the new quad
   unsigned int index = m_vertices.getVertexCount();
   m_vertices.resize(index + 4); // 4 corners for a new quad
 
+  // Define the quad
   m_vertices[index    ].position = sf::Vector2f(x, y);
   m_vertices[index + 1].position = sf::Vector2f(x + m_edge_size, y);
   m_vertices[index + 2].position = sf::Vector2f(x + m_edge_size, y + m_edge_size);
@@ -28,11 +30,16 @@ void Scenery::add_scenery(int tileset_x, int tileset_y, int x, int y)
   m_vertices[index + 1].texCoords = sf::Vector2f(tileset_x + m_edge_size, tileset_y);
   m_vertices[index + 2].texCoords = sf::Vector2f(tileset_x + m_edge_size, tileset_y + m_edge_size);
   m_vertices[index + 3].texCoords = sf::Vector2f(tileset_x, tileset_y + m_edge_size);
+
+  // Save the bounding box for this scenery element
+  m_bounding_boxes.push_back(sf::FloatRect(x, y, m_edge_size, m_edge_size));
 }
 
 void Scenery::draw(sf::RenderTarget& stage, sf::RenderStates states) const
 {
   states.transform *= getTransform();
   states.texture = &m_tileset;
+
+  // Draw the entire scenery as one single large vertexarray.
   stage.draw(m_vertices, states);
 }
