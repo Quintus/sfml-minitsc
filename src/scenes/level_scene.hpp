@@ -17,6 +17,7 @@ private:
   // Convenience shortcut, so we don’t have to filter out
   // the player all the time from the list of all actors.
   PlayerActor* mp_player_actor;
+  Scenery* mp_scenery;
 };
 
 #endif

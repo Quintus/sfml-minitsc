@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "../actors/actor.hpp"
 #include "../actors/player_actor.hpp"
+#include "../scenery.hpp"
 #include "scene.hpp"
 #include "menu_scene.hpp"
 #include "level_scene.hpp"
