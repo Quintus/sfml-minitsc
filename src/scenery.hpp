@@ -35,8 +35,6 @@ public:
 private:
   virtual void draw(sf::RenderTarget& stage, sf::RenderStates states) const;
 
-  int m_width;
-  int m_height;
   int m_edge_size;
   sf::Texture m_tileset;
   sf::VertexArray m_vertices;
